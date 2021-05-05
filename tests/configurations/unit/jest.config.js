@@ -13,6 +13,7 @@ module.exports = {
     '!**/controllers/**',
     '!**/routes/**',
     '!<rootDir>/src/*',
+    '!<rootDir>/src/clients/*',
   ],
   coverageDirectory: '<rootDir>/coverage',
   reporters: [

@@ -34,11 +34,19 @@ export class HeartbeatReleaser {
 
     const deadTasks = this.heartbeatClient.getInactiveTasks();
     this.logger.info(`releasing tasks: ${deadTasks.join()}`);
-    const releasedTasks = this.tasksClient.releaseTasks(deadTasks);
-    this.logger.debug(`released tasks: ${releasedTasks.join()}`);
-    const completedTasks = deadTasks.filter((value) => !releasedTasks.includes(value));
-    this.logger.debug(`removing already closed tasks from heartbeat" ${completedTasks.join()}`);
-    this.heartbeatClient.removeTasks(completedTasks);
+    if (deadTasks.length > 0) {
+      const releasedTasks = this.tasksClient.releaseTasks(deadTasks);
+      this.logger.debug(`released tasks: ${releasedTasks.join()}`);
+      const completedTasks = deadTasks.filter((value) => !releasedTasks.includes(value));
+      if (completedTasks.length > 0) {
+        this.logger.debug(`removing already closed tasks from heartbeat" ${completedTasks.join()}`);
+        this.heartbeatClient.removeTasks(completedTasks);
+      } else {
+        this.logger.debug('no closed tasks to remove from heartbeat');
+      }
+    } else {
+      this.logger.info('no dead heartbeats');
+    }
 
     span.end();
   }

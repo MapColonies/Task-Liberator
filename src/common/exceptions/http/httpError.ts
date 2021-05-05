@@ -1,6 +1,4 @@
-import { HttpError as baseError } from '@map-colonies/error-express-handler';
-
-export class HttpError extends Error implements baseError {
+export class HttpError extends Error {
   protected internalError?: Error;
 
   public constructor(message: string, status: number);

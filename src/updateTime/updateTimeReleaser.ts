@@ -29,9 +29,13 @@ export class UpdateTimeReleaser {
     this.logger.info('starting update time releaser.');
 
     const deadTasks = this.tasksClient.getInactiveTasks();
-    this.logger.info(`releasing tasks: ${deadTasks.join()}`);
-    const released = this.tasksClient.releaseTasks(deadTasks);
-    this.logger.debug(`relesed tasks: ${released.join()}`);
+    if (deadTasks.length > 0) {
+      this.logger.info(`releasing tasks: ${deadTasks.join()}`);
+      const released = this.tasksClient.releaseTasks(deadTasks);
+      this.logger.debug(`relesed tasks: ${released.join()}`);
+    } else {
+      this.logger.info('no daed tasks to release');
+    }
     span.end();
   }
 }
