@@ -71,7 +71,7 @@ describe('HeartbeatReleaser', () => {
       expect(heartbeatRemoveTasksMock).toHaveBeenCalledWith(completedTasks);
     });
 
-    it('wont release dead heartbeats from if there are no completed tasks', function () {
+    it('wont release dead heartbeats if there are no completed tasks', function () {
       //mock data
       const deadHeartbeats = ['dead'];
       const deadTasks = ['dead'];

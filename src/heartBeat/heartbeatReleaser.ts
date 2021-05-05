@@ -33,8 +33,8 @@ export class HeartbeatReleaser {
     this.logger.info('starting heartbeat releaser.');
 
     const deadTasks = this.heartbeatClient.getInactiveTasks();
-    this.logger.info(`releasing tasks: ${deadTasks.join()}`);
     if (deadTasks.length > 0) {
+      this.logger.info(`releasing tasks: ${deadTasks.join()}`);
       const releasedTasks = this.tasksClient.releaseTasks(deadTasks);
       this.logger.debug(`released tasks: ${releasedTasks.join()}`);
       const completedTasks = deadTasks.filter((value) => !releasedTasks.includes(value));
