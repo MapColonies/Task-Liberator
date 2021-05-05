@@ -5,20 +5,19 @@
   "logger": {
     "level": "LOG_LEVEL"
   },
-  "server": {
-    "port": "SERVER_PORT",
-    "request": {
-      "payload": {
-        "limit": "REQUEST_PAYLOAD_LIMIT"
-      }
-    },
-    "response": {
-      "compression": {
-        "enabled": {
-          "__name": "RESPONSE_COMPRESSION_ENABLED",
-          "__format": "boolean"
-        }
-      }
-    }
+  "jobServiceUrl": "JOB_SERVICE_URL",
+  "heartbeat": {
+    "enabled": "HEARTBEAT_ENABLED",
+    "failedDuration": "HEARTBEAT_FAILED_DURATION",
+    "serviceUrl": "HEARTBEAT_SERVICE_URL"
+  },
+  "updateTime": {
+    "enabled": "UPDATE_TIME_ENABLED",
+    "failedDuration": "UPDATE_TIME_FAILED_DURATION"
+  },
+  "httpRetry": {
+    "attempts": 3,
+    "delay": "exponential",
+    "shouldResetTimeout": true
   }
 }
