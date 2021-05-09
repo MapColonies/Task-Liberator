@@ -7,6 +7,8 @@ import { tasksClientMock, tasksReleaseTasksMock } from '../../mocks/clients/task
 
 let releaser: HeartbeatReleaser;
 
+console.log(__dirname);
+
 describe('HeartbeatReleaser', () => {
   beforeEach(function () {
     initTrace();
