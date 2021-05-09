@@ -1,54 +1,18 @@
-# Map Colonies typescript service template
+# Map Colonies Task Liberator
 
 ----------------------------------
-![badge-alerts-lgtm](https://img.shields.io/lgtm/alerts/github/MapColonies/ts-server-boilerplate?style=for-the-badge)
-![grade-badge-lgtm](https://img.shields.io/lgtm/grade/javascript/github/MapColonies/ts-server-boilerplate?style=for-the-badge)
-![snyk](https://img.shields.io/snyk/vulnerabilities/github/MapColonies/ts-server-boilerplate?style=for-the-badge)
+![badge-alerts-lgtm](https://img.shields.io/lgtm/alerts/github/MapColonies/Task-Liberator?style=for-the-badge)
+![grade-badge-lgtm](https://img.shields.io/lgtm/grade/javascript/github/MapColonies/Task-Liberator?style=for-the-badge)
+![snyk](https://img.shields.io/snyk/vulnerabilities/github/MapColonies/Task-Liberator?style=for-the-badge)
 ----------------------------------
 
-This is a basic template for building new map colonies services in typescript.
+this is a job that when run updates "in-progress" tasks in the job management service to "pending" and increase their attempt count, so the can be retried by the relevant task worker.
 
-### template features:
-- eslint configuration with @map-colonies/eslint-config
-- prettier
-- jest
-- nvm configuration
-- Dockerfile
-- commitlint setup
-- git hooks
-- logger using @map-colonies/mc-logger
-- swagger ui & swagger json serve
-- config load
-- tracing and metrics
-- github templates
-  - bug report
-  - feature request
-  - pull request
-- github actions
-  - lint
-  - test
 
-### usage:
+### task release conditions
+- release base on heartbeat: releases tasks for whom the worker did not sent heartbeat for longer the the configured ```HEARTBEAT_FAILED_DURATION``` second
+  - can be toggled with the ```HEARTBEAT_ENABLED``` configuration
+  - required active heartbeat logging service at ```HEARTBEAT_SERVICE_URL```
+- release base on last update time: releases tasks that was not updated for longer the the configured ```UPDATE_TIME_FAILED_DURATION``` second
+  - can be toggled with the ```UPDATE_TIME_ENABLED``` configuration
 
-1. copy the template files to new service repository.
-1. run `npm install `.
-1. run `npm rebuild husky` to configure commit messages linting.
-1. add the required logic for the new service:
-   - to add new routes: create an express router and connect it to express server in ServerBuilder registerControllers function. when adding handler to the router make sure to add "validate" middleware from 'openapi-express-validator' for request validation.
-   - modify the global error handler in the middleware folder to return better error responses and catch the errors before the global handler (currently it returns empty 500 response )
-
-### usage notes:
-
-1. when importing external dependencies from DI (such as McLogger) in class constructor the following decorator must be used to retrieve instance:
-
-```typescript
-@inject(delay(() => <injection token>)) <variable definition>
-```
-
-usage example:
-
-```typescript
-public constructor(
-    @inject(delay(() => MCLogger)) private readonly logger: MCLogger) {
-  }
-```

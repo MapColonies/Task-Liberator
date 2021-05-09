@@ -8,18 +8,19 @@
   "logger": {
     "level": "info"
   },
-  "server": {
-    "port": "8080",
-    "request": {
-      "payload": {
-        "limit": "1mb"
-      }
-    },
-    "response": {
-      "compression": {
-        "enabled": true,
-        "options": null
-      }
-    }
+  "jobServiceUrl": "",
+  "heartbeat": {
+    "enabled": true,
+    "failedDuration": 30,
+    "serviceUrl": ""
+  },
+  "updateTime": {
+    "enabled": true,
+    "failedDuration": 300
+  },
+  "httpRetry": {
+    "attempts": 3,
+    "delay": "exponential",
+    "shouldResetTimeout": true
   }
 }
