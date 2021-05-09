@@ -1,3 +1,4 @@
+console.log(__dirname);
 import jsLogger from '@map-colonies/js-logger';
 import { HeartbeatReleaser } from '../../../src/heartbeat/heartbeatReleaser';
 import { tracerMock, initTrace } from '../../mocks/openTelemetry/tracer';
@@ -6,8 +7,6 @@ import { heartbeatClientMock, heartbeatInactiveTasksMock, heartbeatRemoveTasksMo
 import { tasksClientMock, tasksReleaseTasksMock } from '../../mocks/clients/tasksClient';
 
 let releaser: HeartbeatReleaser;
-
-console.log(__dirname);
 
 describe('HeartbeatReleaser', () => {
   beforeEach(function () {
