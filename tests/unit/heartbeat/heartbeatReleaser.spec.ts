@@ -1,4 +1,3 @@
-console.log(__dirname);
 import jsLogger from '@map-colonies/js-logger';
 import { HeartbeatReleaser } from '../../../src/heartbeat/heartbeatReleaser';
 import { tracerMock, initTrace } from '../../mocks/openTelemetry/tracer';
