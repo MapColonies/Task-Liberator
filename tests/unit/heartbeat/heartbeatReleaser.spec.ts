@@ -17,13 +17,13 @@ describe('HeartbeatReleaser', () => {
   });
 
   describe('run', () => {
-    it('do noting when disabled', function () {
+    it('do noting when disabled', async function () {
       //mock data
       getMock.mockReturnValue('false');
 
       // action
       releaser = new HeartbeatReleaser(configMock, jsLogger({ enabled: false }), tracerMock, heartbeatClientMock, tasksClientMock);
-      releaser.run();
+      await releaser.run();
 
       // expectation
       expect(getMock).toHaveBeenCalledWith('heartbeat.enabled');
@@ -33,13 +33,13 @@ describe('HeartbeatReleaser', () => {
       expect(tasksReleaseTasksMock).not.toHaveBeenCalled();
     });
 
-    it('do noting when there are no dead heartbeats', function () {
+    it('do noting when there are no dead heartbeats', async function () {
       //mock data
       getMock.mockReturnValue(true);
-      heartbeatInactiveTasksMock.mockReturnValue([]);
+      heartbeatInactiveTasksMock.mockResolvedValue([]);
       // action
       releaser = new HeartbeatReleaser(configMock, jsLogger({ enabled: false }), tracerMock, heartbeatClientMock, tasksClientMock);
-      releaser.run();
+      await releaser.run();
 
       // expectation
       expect(getMock).toHaveBeenCalledWith('heartbeat.enabled');
@@ -49,17 +49,17 @@ describe('HeartbeatReleaser', () => {
       expect(tasksReleaseTasksMock).not.toHaveBeenCalled();
     });
 
-    it('release dead heartbeats from completed tasks', function () {
+    it('release dead heartbeats from completed tasks', async function () {
       //mock data
       const deadHeartbeats = ['dead', 'completed'];
       const deadTasks = ['dead'];
       const completedTasks = ['completed'];
       getMock.mockReturnValue(true);
-      heartbeatInactiveTasksMock.mockReturnValue(deadHeartbeats);
-      tasksReleaseTasksMock.mockReturnValue(deadTasks);
+      heartbeatInactiveTasksMock.mockResolvedValue(deadHeartbeats);
+      tasksReleaseTasksMock.mockResolvedValue(deadTasks);
       // action
       releaser = new HeartbeatReleaser(configMock, jsLogger({ enabled: false }), tracerMock, heartbeatClientMock, tasksClientMock);
-      releaser.run();
+      await releaser.run();
 
       // expectation
       expect(getMock).toHaveBeenCalledWith('heartbeat.enabled');
@@ -71,16 +71,16 @@ describe('HeartbeatReleaser', () => {
       expect(heartbeatRemoveTasksMock).toHaveBeenCalledWith(completedTasks);
     });
 
-    it('wont release dead heartbeats if there are no completed tasks', function () {
+    it('wont release dead heartbeats if there are no completed tasks', async function () {
       //mock data
       const deadHeartbeats = ['dead'];
       const deadTasks = ['dead'];
       getMock.mockReturnValue(true);
-      heartbeatInactiveTasksMock.mockReturnValue(deadHeartbeats);
-      tasksReleaseTasksMock.mockReturnValue(deadTasks);
+      heartbeatInactiveTasksMock.mockResolvedValue(deadHeartbeats);
+      tasksReleaseTasksMock.mockResolvedValue(deadTasks);
       // action
       releaser = new HeartbeatReleaser(configMock, jsLogger({ enabled: false }), tracerMock, heartbeatClientMock, tasksClientMock);
-      releaser.run();
+      await releaser.run();
 
       // expectation
       expect(getMock).toHaveBeenCalledWith('heartbeat.enabled');

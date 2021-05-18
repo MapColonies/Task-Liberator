@@ -16,13 +16,13 @@ describe('UpdateTimeReleaser', () => {
   });
 
   describe('run', () => {
-    it('do noting when disabled', function () {
+    it('do noting when disabled', async function () {
       //mock data
       getMock.mockReturnValue('false');
 
       // action
       releaser = new UpdateTimeReleaser(configMock, jsLogger({ enabled: false }), tracerMock, tasksClientMock);
-      releaser.run();
+      await releaser.run();
 
       // expectation
       expect(getMock).toHaveBeenCalledWith('updateTime.enabled');
@@ -31,13 +31,13 @@ describe('UpdateTimeReleaser', () => {
       expect(tasksReleaseTasksMock).not.toHaveBeenCalled();
     });
 
-    it('do noting when there are no dead tasks', function () {
+    it('do noting when there are no dead tasks', async function () {
       //mock data
       getMock.mockReturnValue(true);
-      tasksInactiveTasksMock.mockReturnValue([]);
+      tasksInactiveTasksMock.mockResolvedValue([]);
       // action
       releaser = new UpdateTimeReleaser(configMock, jsLogger({ enabled: false }), tracerMock, tasksClientMock);
-      releaser.run();
+      await releaser.run();
 
       // expectation
       expect(getMock).toHaveBeenCalledWith('updateTime.enabled');
@@ -46,15 +46,15 @@ describe('UpdateTimeReleaser', () => {
       expect(tasksReleaseTasksMock).not.toHaveBeenCalled();
     });
 
-    it('release dead tasks', function () {
+    it('release dead tasks', async function () {
       //mock data
       const deadTasks = ['dead', 'completed'];
       getMock.mockReturnValue(true);
-      tasksInactiveTasksMock.mockReturnValue(deadTasks);
-      tasksReleaseTasksMock.mockReturnValue([]);
+      tasksInactiveTasksMock.mockResolvedValue(deadTasks);
+      tasksReleaseTasksMock.mockResolvedValue([]);
       // action
       releaser = new UpdateTimeReleaser(configMock, jsLogger({ enabled: false }), tracerMock, tasksClientMock);
-      releaser.run();
+      await releaser.run();
 
       // expectation
       expect(getMock).toHaveBeenCalledWith('updateTime.enabled');

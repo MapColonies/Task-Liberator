@@ -16,7 +16,8 @@
   },
   "updateTime": {
     "enabled": true,
-    "failedDuration": 300
+    "failedDuration": 300,
+    "taskTypes": []
   },
   "httpRetry": {
     "attempts": 3,
