@@ -13,7 +13,7 @@ export class HeartbeatClient extends HttpClient {
     const retryConfig = HeartbeatClient.parseConfig(config.get<IHttpRetryConfig>('httpRetry'));
     super(logger, retryConfig);
     this.targetService = 'Heartbeat';
-    this.failedHeartbeatDuration = config.get('heartbeat.failedDuration');
+    this.failedHeartbeatDuration = config.get('heartbeat.failedDurationMS');
     this.baseUrl = config.get('heartbeat.serviceUrl');
   }
 

@@ -19,7 +19,7 @@ export class TasksClient extends HttpClient {
     super(logger, retryConfig);
     this.targetService = 'JobService';
     this.baseUrl = config.get('jobServiceUrl');
-    this.updateTimeout = config.get('updateTime.failedDuration');
+    this.updateTimeout = config.get('updateTime.failedDurationSec');
     this.taskTypes = this.parseTypes(config);
   }
 
