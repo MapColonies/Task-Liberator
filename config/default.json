@@ -11,12 +11,12 @@
   "jobServiceUrl": "",
   "heartbeat": {
     "enabled": true,
-    "failedDurationSec": 30,
+    "failedDurationMS": 30,
     "serviceUrl": ""
   },
   "updateTime": {
     "enabled": true,
-    "failedDurationMS": 300,
+    "failedDurationSec": 300,
     "taskTypes": []
   },
   "httpRetry": {
