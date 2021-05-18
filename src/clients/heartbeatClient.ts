@@ -12,16 +12,18 @@ export class HeartbeatClient extends HttpClient {
   public constructor(@inject(Services.CONFIG) config: IConfig, @inject(Services.LOGGER) logger: Logger) {
     const retryConfig = HeartbeatClient.parseConfig(config.get<IHttpRetryConfig>('httpRetry'));
     super(logger, retryConfig);
-    this.failedHeartbeatDuration = config.get('heartbeat.failedDuration');
+    this.targetService = 'Heartbeat';
+    this.failedHeartbeatDuration = config.get('heartbeat.failedDurationMS');
     this.baseUrl = config.get('heartbeat.serviceUrl');
   }
 
-  public getInactiveTasks(): string[] {
-    //TODO: implement
-    return [];
+  public async getInactiveTasks(): Promise<string[]> {
+    const url = `${this.baseUrl}/heartbeat/expired/${this.failedHeartbeatDuration}`;
+    return this.get<string[]>(url);
   }
 
-  public removeTasks(ids: string[]): void {
-    //TODO: implement
+  public async removeTasks(ids: string[]): Promise<void> {
+    const url = `${this.baseUrl}/heartbeat/remove`;
+    await this.post(url, ids);
   }
 }

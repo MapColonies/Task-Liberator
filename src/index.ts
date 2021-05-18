@@ -10,23 +10,34 @@ import { registerExternalValues } from './containerConfig';
 import { UpdateTimeReleaser } from './updateTime/updateTimeReleaser';
 import { HeartbeatReleaser } from './heartbeat/heartbeatReleaser';
 
-const tracing = new Tracing('app_tracer', [
-  new HttpInstrumentation({ ignoreOutgoingUrls: IGNORED_OUTGOING_TRACE_ROUTES, ignoreIncomingPaths: IGNORED_INCOMING_TRACE_ROUTES }),
-]);
-
-registerExternalValues(tracing);
-const logger = container.resolve<Logger>(Services.LOGGER);
-try {
-  container.resolve(UpdateTimeReleaser).run();
-} catch (err) {
-  const error = err as Error;
-  logger.error(error.message);
-}
-try {
-  container.resolve(HeartbeatReleaser).run();
-} catch (err) {
-  const error = err as Error;
-  logger.error(error.message);
+async function run(logger: Logger): Promise<void> {
+  try {
+    await container.resolve(UpdateTimeReleaser).run();
+  } catch (err) {
+    const error = err as Error;
+    logger.error(error.message);
+  }
+  try {
+    await container.resolve(HeartbeatReleaser).run();
+  } catch (err) {
+    const error = err as Error;
+    logger.error(error.message);
+  }
 }
 
-void tracing.stop();
+function main(): void {
+  const tracing = new Tracing('task_liberator_tracer', [
+    new HttpInstrumentation({ ignoreOutgoingUrls: IGNORED_OUTGOING_TRACE_ROUTES, ignoreIncomingPaths: IGNORED_INCOMING_TRACE_ROUTES }),
+  ]);
+
+  registerExternalValues(tracing);
+  const logger = container.resolve<Logger>(Services.LOGGER);
+  void run(logger).catch((err) => {
+    const error = err as Error;
+    logger.error(error.message);
+  });
+
+  void tracing.stop();
+}
+
+main();

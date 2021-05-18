@@ -19,7 +19,7 @@ export class UpdateTimeReleaser {
     this.enabled = toBoolean(config.get('updateTime.enabled'));
   }
 
-  public run(): void {
+  public async run(): Promise<void> {
     if (!this.enabled) {
       this.logger.info('skipping update time releaser, it is disabled.');
       return;
@@ -28,11 +28,11 @@ export class UpdateTimeReleaser {
     const span = this.tracer.startSpan('update-time-releaser');
     this.logger.info('starting update time releaser.');
 
-    const deadTasks = this.tasksClient.getInactiveTasks();
+    const deadTasks = await this.tasksClient.getInactiveTasks();
     if (deadTasks.length > 0) {
       this.logger.info(`releasing tasks: ${deadTasks.join()}`);
-      const released = this.tasksClient.releaseTasks(deadTasks);
-      this.logger.debug(`relesed tasks: ${released.join()}`);
+      const released = await this.tasksClient.releaseTasks(deadTasks);
+      this.logger.debug(`released tasks: ${released.join()}`);
     } else {
       this.logger.info('no daed tasks to release');
     }

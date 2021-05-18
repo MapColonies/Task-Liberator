@@ -8,12 +8,13 @@
   "jobServiceUrl": "JOB_SERVICE_URL",
   "heartbeat": {
     "enabled": "HEARTBEAT_ENABLED",
-    "failedDuration": "HEARTBEAT_FAILED_DURATION",
+    "failedDurationMS": "HEARTBEAT_FAILED_DURATION_MS",
     "serviceUrl": "HEARTBEAT_SERVICE_URL"
   },
   "updateTime": {
     "enabled": "UPDATE_TIME_ENABLED",
-    "failedDuration": "UPDATE_TIME_FAILED_DURATION"
+    "failedDurationSec": "UPDATE_TIME_FAILED_DURATION_SEC",
+    "taskTypes": "UPDATE_TIME_TASK_TYPES"
   },
   "httpRetry": {
     "attempts": "HTTP_RETRY_ATTEMPTS",

@@ -23,7 +23,7 @@ export class HeartbeatReleaser {
     this.enabled = toBoolean(config.get('heartbeat.enabled'));
   }
 
-  public run(): void {
+  public async run(): Promise<void> {
     if (!this.enabled) {
       this.logger.info('skipping heartbeat releaser, it is disabled.');
       return;
@@ -32,15 +32,15 @@ export class HeartbeatReleaser {
     const span = this.tracer.startSpan('heartbeat-releaser');
     this.logger.info('starting heartbeat releaser.');
 
-    const deadTasks = this.heartbeatClient.getInactiveTasks();
+    const deadTasks = await this.heartbeatClient.getInactiveTasks();
     if (deadTasks.length > 0) {
       this.logger.info(`releasing tasks: ${deadTasks.join()}`);
-      const releasedTasks = this.tasksClient.releaseTasks(deadTasks);
+      const releasedTasks = await this.tasksClient.releaseTasks(deadTasks);
       this.logger.debug(`released tasks: ${releasedTasks.join()}`);
       const completedTasks = deadTasks.filter((value) => !releasedTasks.includes(value));
       if (completedTasks.length > 0) {
         this.logger.debug(`removing already closed tasks from heartbeat" ${completedTasks.join()}`);
-        this.heartbeatClient.removeTasks(completedTasks);
+        await this.heartbeatClient.removeTasks(completedTasks);
       } else {
         this.logger.debug('no closed tasks to remove from heartbeat');
       }
