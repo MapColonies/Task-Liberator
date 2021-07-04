@@ -6,7 +6,8 @@
 ![snyk](https://img.shields.io/snyk/vulnerabilities/github/MapColonies/Task-Liberator?style=for-the-badge)
 ----------------------------------
 
-this is a job that when run updates "in-progress" tasks in the job management service to "pending" and increase their attempt count, so the can be retried by the relevant task worker.
+This is a cron job.
+The porpuse of this cron job is to update "in-progress" tasks in the job management service to "pending" state and increase their attempt count, so they can be retried by the relevant task worker, this happens when the task is taking longer then configured expiration time or it's heartbeat has stopped.
 
 
 ### task release conditions
