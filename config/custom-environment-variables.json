@@ -7,7 +7,10 @@
   },
   "jobServiceUrl": "JOB_SERVICE_URL",
   "heartbeat": {
-    "enabled": "HEARTBEAT_ENABLED",
+    "enabled": {
+      "__name": "HEARTBEAT_ENABLED",
+      "__format": "boolean"
+    },
     "failedDurationMS": {
       "__name": "HEARTBEAT_FAILED_DURATION_MS",
       "__format": "number"
@@ -15,7 +18,10 @@
     "serviceUrl": "HEARTBEAT_SERVICE_URL"
   },
   "updateTime": {
-    "enabled": "UPDATE_TIME_ENABLED",
+    "enabled": {
+      "__name": "UPDATE_TIME_ENABLED",
+      "__format": "boolean"
+    },
     "failedDurationSec": {
       "__name": "UPDATE_TIME_FAILED_DURATION_SEC",
       "__format": "number"
@@ -25,6 +31,9 @@
   "httpRetry": {
     "attempts": "HTTP_RETRY_ATTEMPTS",
     "delay": "HTTP_RETRY_DELAY",
-    "shouldResetTimeout": "HTTP_RETRY_RESET_TIMEOUT"
+    "shouldResetTimeout": {
+      "__name": "HTTP_RETRY_RESET_TIMEOUT",
+      "__format": "boolean"
+    }
   }
 }
