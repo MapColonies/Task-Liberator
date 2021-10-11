@@ -29,7 +29,10 @@
     "taskTypes": "UPDATE_TIME_TASK_TYPES"
   },
   "httpRetry": {
-    "attempts": "HTTP_RETRY_ATTEMPTS",
+    "attempts": {
+      "__name": "HTTP_RETRY_ATTEMPTS",
+      "__format": "number"
+    },
     "delay": "HTTP_RETRY_DELAY",
     "shouldResetTimeout": {
       "__name": "HTTP_RETRY_RESET_TIMEOUT",
