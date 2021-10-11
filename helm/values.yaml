@@ -5,54 +5,54 @@ global:
   environment: {}
 
 enabled: true
-environment: "development"
+environment: 'development'
 replicaCount: 1
 initialDelaySeconds: 60
 nodePort: 30030 #for minikube deployment only
 
 cloudProvider:
-  dockerRegistryUrl: "my-registry-url.io"
-  flavor: "openshift"
+  dockerRegistryUrl: 'my-registry-url.io'
+  flavor: 'openshift'
 
 image:
-  repository: "task-liberator-registry"
-  tag: "latest"
+  repository: 'task-liberator-registry'
+  tag: 'latest'
 
 env:
   port: 8080
   targetPort: 8080
-  protocol: "TCP"
-  openApiFilPath: "./openapi3.yaml"
-  logLevel: "info"
+  protocol: 'TCP'
+  openApiFilPath: './openapi3.yaml'
+  logLevel: 'info'
   tracing:
     enabled: false
-    url: "http://localhost:55681/v1/trace"
+    url: 'http://localhost:55681/v1/trace'
   metrics:
     enabled: false
-    url: "http://localhost:55681/v1/metrics"
-  jobServiceUrl: "http://job-service-url"
+    url: 'http://localhost:55681/v1/metrics'
+  jobServiceUrl: 'http://job-service-url'
   heartbeat:
     enabled: true
     failedDurationMs: 30
-    serviceUrl: "http://heartbeat-service-url"
-  updateTime: 
+    serviceUrl: 'http://heartbeat-service-url'
+  updateTime:
     enabled: true
     failedDurationSec: 300
     taskTypes: []
   httpRetry:
     attempts: 3
-    delay: "exponential"
+    delay: 'exponential'
     shouldResetTimeout: true
-  
+
 resources:
   enabled: false
   value:
     limits:
-      cpu: "100m"
-      memory: "128Mi"
+      cpu: '100m'
+      memory: '128Mi'
     requests:
-      cpu: "100m"
-      memory: "128Mi"
+      cpu: '100m'
+      memory: '128Mi'
 
 route:
   enabled: false
@@ -61,7 +61,7 @@ route:
 ingress:
   enabled: false
   path: /
-  host: "localhost"
+  host: 'localhost'
   cors:
     enabled: true
     origin: '*'
