@@ -45,7 +45,7 @@ env:
     shouldResetTimeout: true
 
 resources:
-  enabled: false
+  enabled: true
   value:
     limits:
       cpu: '100m'
