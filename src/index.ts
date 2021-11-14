@@ -9,6 +9,7 @@ import { IGNORED_INCOMING_TRACE_ROUTES, IGNORED_OUTGOING_TRACE_ROUTES, Services 
 import { registerExternalValues } from './containerConfig';
 import { UpdateTimeReleaser } from './updateTime/updateTimeReleaser';
 import { HeartbeatReleaser } from './heartbeat/heartbeatReleaser';
+import { ExpirationStatusUpdater } from './taskExpiration/expirartionStatusUpdater';
 
 async function run(logger: Logger): Promise<void> {
   try {
@@ -19,6 +20,12 @@ async function run(logger: Logger): Promise<void> {
   }
   try {
     await container.resolve(HeartbeatReleaser).run();
+  } catch (err) {
+    const error = err as Error;
+    logger.error(error.message);
+  }
+  try {
+    await container.resolve(ExpirationStatusUpdater).run();
   } catch (err) {
     const error = err as Error;
     logger.error(error.message);

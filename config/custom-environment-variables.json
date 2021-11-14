@@ -26,7 +26,14 @@
       "__name": "UPDATE_TIME_FAILED_DURATION_SEC",
       "__format": "number"
     },
-    "taskTypes": "UPDATE_TIME_TASK_TYPES"
+    "taskTypes": "UPDATE_TIME_TASK_TYPES",
+    "ignoredTaskTypes": "UPDATE_TIME_IGNORED_TASK_TYPES"
+  },
+  "expirationStatus": {
+    "enabled": {
+      "__name": "EXPIRATION_STATUS_ENABLED",
+      "__format": "boolean"
+    }
   },
   "httpRetry": {
     "attempts": {

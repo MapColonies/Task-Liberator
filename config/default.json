@@ -17,7 +17,11 @@
   "updateTime": {
     "enabled": true,
     "failedDurationSec": 300,
-    "taskTypes": []
+    "taskTypes": [],
+    "ignoredTaskTypes": []
+  },
+  "expirationStatus": {
+    "enabled": true
   },
   "httpRetry": {
     "attempts": 3,

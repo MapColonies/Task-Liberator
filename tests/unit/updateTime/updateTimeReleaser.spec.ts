@@ -33,7 +33,7 @@ describe('UpdateTimeReleaser', () => {
 
     it('do noting when there are no dead tasks', async function () {
       //mock data
-      getMock.mockReturnValue(true);
+      getMock.mockReturnValueOnce(true);
       tasksInactiveTasksMock.mockResolvedValue([]);
       // action
       releaser = new UpdateTimeReleaser(configMock, jsLogger({ enabled: false }), tracerMock, tasksClientMock);
