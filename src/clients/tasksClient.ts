@@ -13,6 +13,7 @@ export class TasksClient extends HttpClient {
   private readonly baseUrl: string;
   private readonly updateTimeout: number;
   private readonly taskTypes?: ITaskType[];
+  private readonly ignoredTaskTypes?: ITaskType[];
 
   public constructor(@inject(Services.CONFIG) config: IConfig, @inject(Services.LOGGER) logger: Logger) {
     const retryConfig = TasksClient.parseConfig(config.get<IHttpRetryConfig>('httpRetry'));
@@ -20,7 +21,8 @@ export class TasksClient extends HttpClient {
     this.targetService = 'JobService';
     this.baseUrl = config.get('jobServiceUrl');
     this.updateTimeout = config.get('updateTime.failedDurationSec');
-    this.taskTypes = this.parseTypes(config);
+    this.taskTypes = this.parseTypes(config.get('updateTime.taskTypes'));
+    this.ignoredTaskTypes = this.parseTypes(config.get('updateTime.ignoredTaskTypes'));
   }
 
   public async getInactiveTasks(): Promise<string[]> {
@@ -28,6 +30,7 @@ export class TasksClient extends HttpClient {
     const body = {
       inactiveTimeSec: this.updateTimeout,
       types: this.taskTypes,
+      ignoreTypes: this.ignoredTaskTypes,
     };
     return this.post<string[]>(url, body);
   }
@@ -37,8 +40,12 @@ export class TasksClient extends HttpClient {
     return this.post<string[]>(url, ids);
   }
 
-  private parseTypes(config: IConfig): ITaskType[] | undefined {
-    let types = config.get('updateTime.taskTypes');
+  public async updateExpiredStatus(): Promise<void> {
+    const url = `${this.baseUrl}/tasks/updateExpiredStatus`;
+    await this.post(url);
+  }
+
+  private parseTypes(types: unknown): ITaskType[] | undefined {
     if (typeof types === 'string') {
       types = JSON.parse(types);
     }
