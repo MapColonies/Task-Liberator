@@ -39,6 +39,9 @@ env:
     enabled: true
     failedDurationSec: 300
     taskTypes: []
+    ignoredTaskTypes: []
+  expirationStatus:
+    enabled: true    
   httpRetry:
     attempts: 3
     delay: 'exponential'

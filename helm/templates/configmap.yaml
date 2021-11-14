@@ -17,6 +17,8 @@ data:
   UPDATE_TIME_ENABLED: {{ .Values.env.updateTime.enabled | quote }}
   UPDATE_TIME_FAILED_DURATION_SEC: {{ .Values.env.updateTime.failedDurationSec | quote }}
   UPDATE_TIME_TASK_TYPES: {{ .Values.env.updateTime.taskTypes | quote }}
+  UPDATE_TIME_IGNORED_TASK_TYPES: {{ .Values.env.updateTime.ignoredTaskTypes | quote }}
+  EXPIRATION_STATUS_ENABLED: {{ .Values.env.expirationStatus.enabled | quote }}
   HTTP_RETRY_ATTEMPTS: {{ .Values.env.httpRetry.attempts | quote }}
   HTTP_RETRY_DELAY: {{ .Values.env.httpRetry.delay | quote }}
   HTTP_RETRY_RESET_TIMEOUT: {{ .Values.env.httpRetry.shouldResetTimeout | quote }}
