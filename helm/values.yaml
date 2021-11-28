@@ -33,7 +33,7 @@ env:
   jobServiceUrl: 'http://job-service-url'
   heartbeat:
     enabled: true
-    failedDurationMs: 30
+    failedDurationMs: 1000
     serviceUrl: 'http://heartbeat-service-url'
   updateTime:
     enabled: true
