@@ -11,7 +11,7 @@
   "jobServiceUrl": "",
   "heartbeat": {
     "enabled": true,
-    "failedDurationMS": 30,
+    "failedDurationMS": 1000,
     "serviceUrl": ""
   },
   "updateTime": {
