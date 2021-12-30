@@ -21,5 +21,3 @@
 .idea/
 *.tmproj
 .vscode/
-# Local config file
-local.yaml
