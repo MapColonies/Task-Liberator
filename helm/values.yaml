@@ -3,6 +3,9 @@ global:
   tracing: {}
   metrics: {}
   environment: {}
+  baseUrls:
+    jobManager: 'http://job-service-url'
+    heartbeatManager: 'http://heartbeat-service-url'
 
 enabled: true
 environment: 'development'
@@ -13,6 +16,15 @@ nodePort: 30030 #for minikube deployment only
 cloudProvider:
   dockerRegistryUrl: 'my-registry-url.io'
   flavor: 'openshift'
+  imagePullSecretName: acr-registry
+
+
+cron:
+  schedule: "*/1 * * * *"
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 3
+  concurrencyPolicy: Forbid
+  restartPolicy: OnFailure
 
 image:
   repository: 'task-liberator-registry'
@@ -30,11 +42,9 @@ env:
   metrics:
     enabled: false
     url: 'http://localhost:55681/v1/metrics'
-  jobServiceUrl: 'http://job-service-url'
   heartbeat:
     enabled: true
     failedDurationMs: 1000
-    serviceUrl: 'http://heartbeat-service-url'
   updateTime:
     enabled: true
     failedDurationSec: 300

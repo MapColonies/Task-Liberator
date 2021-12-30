@@ -83,6 +83,18 @@ Returns the cloud provider docker registry url from global if exists or from the
 {{- end -}}
 
 {{/*
+Returns the cloud provider image pull secret name from global if exists or from the chart's values
+*/}}
+{{- define "task-liberator.cloudProviderImagePullSecretName" -}}
+{{- if .Values.global.cloudProvider.imagePullSecretName }}
+    {{- .Values.global.cloudProvider.imagePullSecretName -}}
+{{- else if .Values.cloudProvider.imagePullSecretName -}}
+    {{- .Values.cloudProvider.imagePullSecretName -}}
+{{- else -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
 Returns the tracing url from global if exists or from the chart's values
 */}}
 {{- define "task-liberator.tracingUrl" -}}
