@@ -10,10 +10,10 @@ data:
   OPENAPI_FILE_PATH: {{ .Values.env.openApiFilPath | quote }}
   LOG_LEVEL: {{ .Values.env.logLevel | quote }}
   SERVER_PORT: {{ .Values.env.port | quote }}
-  JOB_SERVICE_URL: {{ .Values.env.jobServiceUrl | quote }}
+  JOB_SERVICE_URL: {{ .Values.global.baseUrls.jobManager | quote }}
   HEARTBEAT_ENABLED: {{ .Values.env.heartbeat.enabled | quote }}
   HEARTBEAT_FAILED_DURATION_MS: {{ .Values.env.heartbeat.failedDurationMs | quote }}
-  HEARTBEAT_SERVICE_URL: {{ .Values.env.heartbeat.serviceUrl | quote }}
+  HEARTBEAT_SERVICE_URL: {{ .Values.global.baseUrls.heartbeatManager | quote }}
   UPDATE_TIME_ENABLED: {{ .Values.env.updateTime.enabled | quote }}
   UPDATE_TIME_FAILED_DURATION_SEC: {{ .Values.env.updateTime.failedDurationSec | quote }}
   UPDATE_TIME_TASK_TYPES: {{ .Values.env.updateTime.taskTypes | quote }}

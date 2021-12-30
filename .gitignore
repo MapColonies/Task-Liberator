@@ -109,3 +109,6 @@ dist
 # Jest
 jest_html_reporters.html
 reports
+
+# Helm local config values file
+local.yaml
