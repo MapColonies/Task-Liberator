@@ -9,11 +9,11 @@ global:
 
 authentication:
   ca:
-    enabled: true
+    enabled: false
     useExternal: false
     externalSecretName: ""
   ssl:
-    enabled: true
+    enabled: false
     useExternal: false
     externalSecretName: ""
 
