@@ -14,7 +14,7 @@ export class HeartbeatClient extends HttpClient {
     super(logger, retryConfig);
     this.targetService = 'Heartbeat';
     this.failedHeartbeatDuration = config.get('heartbeat.failedDurationMS');
-    this.baseUrl = config.get('global.baseUrls.heartbeatManager');
+    this.baseUrl = config.get('heartbeat.serviceUrl');
   }
 
   public async getInactiveTasks(): Promise<string[]> {
