@@ -19,7 +19,7 @@ export class TasksClient extends HttpClient {
     const retryConfig = TasksClient.parseConfig(config.get<IHttpRetryConfig>('httpRetry'));
     super(logger, retryConfig);
     this.targetService = 'JobService';
-    this.baseUrl = config.get('global.baseUrls.jobManager');
+    this.baseUrl = config.get('jobServiceUrl');
     this.updateTimeout = config.get('updateTime.failedDurationSec');
     this.taskTypes = this.parseTypes(config.get('updateTime.taskTypes'));
     this.ignoredTaskTypes = this.parseTypes(config.get('updateTime.ignoredTaskTypes'));
