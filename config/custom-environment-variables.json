@@ -1,7 +1,4 @@
 {
-  "openapiConfig": {
-    "filePath": "OPENAPI_FILE_PATH"
-  },
   "logger": {
     "level": "LOG_LEVEL"
   },
