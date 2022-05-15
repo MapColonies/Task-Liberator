@@ -8,10 +8,10 @@ metadata:
   name: {{ .Release.Name }}-{{ $chartName }}-configmap
 data:
   LOG_LEVEL: {{ .Values.env.logLevel | quote }}
-  JOB_SERVICE_URL: {{ .Values.global.baseUrls.jobManager | quote }}
+  JOB_SERVICE_URL: {{ .Values.rasterCommon.serviceUrls.jobManager | quote }}
   HEARTBEAT_ENABLED: {{ .Values.env.heartbeat.enabled | quote }}
   HEARTBEAT_FAILED_DURATION_MS: {{ .Values.env.heartbeat.failedDurationMs | quote }}
-  HEARTBEAT_SERVICE_URL: {{ .Values.global.baseUrls.heartbeatManager | quote }}
+  HEARTBEAT_SERVICE_URL: {{ .Values.rasterCommon.serviceUrls.heartbeatManager | quote }}
   UPDATE_TIME_ENABLED: {{ .Values.env.updateTime.enabled | quote }}
   UPDATE_TIME_FAILED_DURATION_SEC: {{ .Values.env.updateTime.failedDurationSec | quote }}
   UPDATE_TIME_TASK_TYPES: {{ .Values.env.updateTime.taskTypes | quote }}
