@@ -3,19 +3,21 @@ global:
   tracing: {}
   metrics: {}
   environment: {}
-  baseUrls:
-    jobManager: 'http://job-service-url'
-    heartbeatManager: 'http://heartbeat-service-url'
 
 authentication:
-  ca:
-    enabled: false
-    useExternal: false
-    externalSecretName: ""
   ssl:
     enabled: false
     useExternal: false
     externalSecretName: ""
+
+rasterCommon:
+  serviceUrls:
+    jobManager: 'http://job-service-url'
+    heartbeatManager: 'http://heartbeat-service-url'
+  ca:
+    secretName: ''
+    path: '/usr/local/share/ca-certificates'
+    key: 'ca.crt'
 
 # ====================================================================================================
 # Local certificate files variables

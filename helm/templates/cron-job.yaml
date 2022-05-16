@@ -6,14 +6,7 @@
 {{- if .Values.enabled -}}
 
 
-{{ $caSecretName := ternary .Values.authentication.ca.externalSecretName (printf "%s%s" .Release.Name "-root-ca") .Values.authentication.ca.useExternal }}
 {{ $sslSecretName := ternary .Values.authentication.ssl.externalSecretName (printf "%s%s" .Release.Name "-open-ssl") .Values.authentication.ssl.useExternal }}
-
-{{- if .Values.authentication.ca.enabled }}
-{{- if and .Values.authentication.ca.useExternal (not .Values.authentication.ca.externalSecretName) }}
-{{- fail "When using external ca secret the value for .Values.authentication.ca.externalSecretName should be set" }}
-{{- end }}
-{{- end }}
 
 {{- if .Values.authentication.ssl.enabled }}
 {{- if and .Values.authentication.ssl.useExternal (not .Values.authentication.ssl.externalSecretName) }}
@@ -45,10 +38,10 @@ spec:
             - name: {{ $cloudProviderImagePullSecretName | quote }}
           {{- end }}
           volumes:
-          {{- if .Values.authentication.ca.enabled }}
+          {{- if .Values.rasterCommon.ca.secretName }}
           - name: root-ca
             secret:
-              secretName: {{ $caSecretName }}
+              secretName: {{ .Values.rasterCommon.ca.secretName }}
           {{- end }}
           {{- if .Values.authentication.ssl.enabled }}
           - name: open-ssl
@@ -63,19 +56,20 @@ spec:
               {{- end }}
               imagePullPolicy: {{ .Values.image.pullPolicy }}
               env:
-                {{- if .Values.authentication.ca.enabled }}
+               {{- if .Values.rasterCommon.ca.secretName }}
                 - name: REQUESTS_CA_BUNDLE
-                  value: "/usr/local/share/ca-certificates/ca.crt"
+                  value: {{ printf "%s/%s" .Values.rasterCommon.ca.path .Values.rasterCommon.ca.key | quote }}
                 - name: NODE_EXTRA_CA_CERTS
-                  value: "[/usr/local/share/ca-certificates/ca.crt]"
-                {{- end }}
+                  value: {{ printf "[%s/%s]" .Values.rasterCommon.ca.path .Values.rasterCommon.ca.key | quote }}
+            {{- end }}
               envFrom:
                 - configMapRef:
                     name: {{ $releaseName }}-{{ $chartName }}-configmap
               volumeMounts: 
-                {{- if .Values.authentication.ca.enabled }}
+                {{- if .Values.rasterCommon.ca.secretName }}
                 - name: root-ca
-                  mountPath: "/usr/local/share/ca-certificates"
+                  mountPath: {{ printf "%s/%s" .Values.rasterCommon.ca.path .Values.rasterCommon.ca.key | quote }}
+                  subPath: {{ quote .Values.rasterCommon.ca.key }}
                 {{- end }}
                 {{- if .Values.authentication.ssl.enabled }}
                 - name: open-ssl
