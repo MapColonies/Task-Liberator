@@ -10,7 +10,7 @@ authentication:
     useExternal: false
     externalSecretName: ""
 
-rasterCommon:
+sharedData:
   serviceUrls:
     jobManager: 'http://job-service-url'
     heartbeatManager: 'http://heartbeat-service-url'
