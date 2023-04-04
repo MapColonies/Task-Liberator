@@ -14,8 +14,8 @@ data:
   HEARTBEAT_SERVICE_URL: {{ .Values.sharedData.serviceUrls.heartbeatManager | quote }}
   UPDATE_TIME_ENABLED: {{ .Values.env.updateTime.enabled | quote }}
   UPDATE_TIME_FAILED_DURATION_SEC: {{ .Values.env.updateTime.failedDurationSec | quote }}
-  UPDATE_TIME_TASK_TYPES: {{ .Values.env.updateTime.taskTypes | quote }}
-  UPDATE_TIME_IGNORED_TASK_TYPES: {{ .Values.env.updateTime.ignoredTaskTypes | quote }}
+  UPDATE_TIME_TASK_TYPES: {{ .Values.env.updateTime.taskTypes | toJson | quote }}
+  UPDATE_TIME_IGNORED_TASK_TYPES: {{ .Values.env.updateTime.ignoredTaskTypes | toJson | quote }}
   EXPIRATION_STATUS_ENABLED: {{ .Values.env.expirationStatus.enabled | quote }}
   HTTP_RETRY_ATTEMPTS: {{ .Values.env.httpRetry.attempts | quote }}
   HTTP_RETRY_DELAY: {{ .Values.env.httpRetry.delay | quote }}
