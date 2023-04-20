@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.7](https://github.com/MapColonies/Task-Liberator/compare/v1.1.6...v1.1.7) (2023-04-20)
+
+
+### Bug Fixes
+
+* fix github actions ([#15](https://github.com/MapColonies/Task-Liberator/issues/15)) ([a474488](https://github.com/MapColonies/Task-Liberator/commit/a474488b4339591dfb550fb47c1c5f019d5b976a))
+
 ### [1.1.6](https://github.com/MapColonies/Task-Liberator/compare/v1.1.1...v1.1.6) (2022-09-08)
 
 
