@@ -1,8 +1,8 @@
 import { Span } from '@opentelemetry/api';
 
 const endMock = jest.fn();
-const spanMock = ({
+const spanMock = {
   end: endMock,
-} as unknown) as Span;
+} as unknown as Span;
 
 export { spanMock, endMock };

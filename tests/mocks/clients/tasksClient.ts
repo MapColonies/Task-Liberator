@@ -4,10 +4,10 @@ const tasksInactiveTasksMock = jest.fn();
 const tasksReleaseTasksMock = jest.fn();
 const updateExpiredStatusMock = jest.fn();
 
-const tasksClientMock = ({
+const tasksClientMock = {
   getInactiveTasks: tasksInactiveTasksMock,
   releaseTasks: tasksReleaseTasksMock,
   updateExpiredStatus: updateExpiredStatusMock,
-} as unknown) as TasksClient;
+} as unknown as TasksClient;
 
 export { tasksClientMock, tasksInactiveTasksMock, tasksReleaseTasksMock, updateExpiredStatusMock };
