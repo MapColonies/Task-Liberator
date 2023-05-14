@@ -60,6 +60,7 @@ export abstract class HttpClient {
 
   protected async get<T>(url: string, queryParams?: Record<string, unknown>, retryConfig?: IAxiosRetryConfig): Promise<T> {
     try {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       const reqConfig = retryConfig ? { ...this.axiosOptions, 'axios-retry': retryConfig } : { ...this.axiosOptions };
       reqConfig.params = queryParams;
       const res = await this.axiosClient.get<T>(url, reqConfig);
@@ -72,6 +73,7 @@ export abstract class HttpClient {
 
   protected async post<T>(url: string, body?: unknown, retryConfig?: IAxiosRetryConfig): Promise<T> {
     try {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       const reqConfig = retryConfig ? { ...this.axiosOptions, 'axios-retry': retryConfig } : this.axiosOptions;
       const res = await this.axiosClient.post<T>(url, body, reqConfig);
       return res.data;
@@ -83,6 +85,7 @@ export abstract class HttpClient {
 
   protected async put<T>(url: string, body?: unknown, retryConfig?: IAxiosRetryConfig): Promise<T> {
     try {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       const reqConfig = retryConfig ? { ...this.axiosOptions, 'axios-retry': retryConfig } : this.axiosOptions;
       const res = await this.axiosClient.put<T>(url, body, reqConfig);
       return res.data;
