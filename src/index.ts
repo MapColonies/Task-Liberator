@@ -33,7 +33,7 @@ async function run(logger: Logger): Promise<void> {
 }
 
 function main(): void {
-  const tracing = new Tracing('task_liberator_tracer', [
+  const tracing = new Tracing([
     new HttpInstrumentation({ ignoreOutgoingUrls: IGNORED_OUTGOING_TRACE_ROUTES, ignoreIncomingPaths: IGNORED_INCOMING_TRACE_ROUTES }),
   ]);
 
