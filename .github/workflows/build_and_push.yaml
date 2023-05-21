@@ -16,5 +16,8 @@ jobs:
           login-server: ${{ secrets.ACR_URL }}
           username: ${{ secrets.ACR_PUSH_USER }}
           password: ${{ secrets.ACR_PUSH_TOKEN }}
+      - name: downcase repository
+        run: |
+          echo "Docker_Repository=${Docker_Repository,,}" >>${GITHUB_ENV}
       - run: docker build . -t ${{ env.Docker_Repository }}
       - run: docker push ${{ env.Docker_Repository }}
