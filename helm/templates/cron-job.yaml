@@ -64,7 +64,7 @@ spec:
             {{- end }}
               envFrom:
                 - configMapRef:
-                    name: {{ $releaseName }}-{{ $chartName }}-configmap
+                    name: {{ $releaseName }}-configmap
               volumeMounts: 
                 {{- if .Values.sharedData.ca.secretName }}
                 - name: root-ca
