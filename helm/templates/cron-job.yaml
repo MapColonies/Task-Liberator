@@ -17,7 +17,7 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: {{ $releaseName }}-{{ $chartName }}
+  name: {{ $releaseName }}
   labels:
     app: {{ $chartName }}
     component: {{ $chartName }}
