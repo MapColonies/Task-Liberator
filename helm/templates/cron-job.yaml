@@ -17,7 +17,7 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: {{ $releaseName }}
+  name: {{ $releaseName }}-{{ $chartName }}
   labels:
     app: {{ $chartName }}
     component: {{ $chartName }}
@@ -64,7 +64,7 @@ spec:
             {{- end }}
               envFrom:
                 - configMapRef:
-                    name: {{ $releaseName }}-configmap
+                    name: {{ $releaseName }}-{{ $chartName }}-configmap
               volumeMounts: 
                 {{- if .Values.sharedData.ca.secretName }}
                 - name: root-ca
