@@ -1,6 +1,6 @@
 {
   "name": "task-liberator",
-  "version": "1.1.13",
+  "version": "1.1.14",
   "description": "This is map colonies job management system failed clients task releaser",
   "main": "./src/index.ts",
   "scripts": {

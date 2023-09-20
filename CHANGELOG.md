@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.14](https://github.com/MapColonies/Task-Liberator/compare/v1.1.13...v1.1.14) (2023-09-20)
+
+
+### Bug Fixes
+
+* cancelled the last revert ([a739892](https://github.com/MapColonies/Task-Liberator/commit/a739892020236ce5a322de3104a3c6260fc25324))
+* removed chart name from template names (MAPCO-3109) ([#20](https://github.com/MapColonies/Task-Liberator/issues/20)) ([8affcad](https://github.com/MapColonies/Task-Liberator/commit/8affcad880bbbcc02da4b821a738aa27c7740a4a))
+* reverted to previous commit ([542d964](https://github.com/MapColonies/Task-Liberator/commit/542d964be0b5860ea6e1ff6368391981cd1502aa))
+
 ### [1.1.13](https://github.com/MapColonies/Task-Liberator/compare/v1.1.12...v1.1.13) (2023-05-21)
 
 ### [1.1.12](https://github.com/MapColonies/Task-Liberator/compare/v1.1.11...v1.1.12) (2023-05-21)
