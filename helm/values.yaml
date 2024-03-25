@@ -3,21 +3,16 @@ global:
   tracing: {}
   metrics: {}
   environment: {}
+  ca:
+    secretName: ''
+    path: '/usr/local/share/ca-certificates'
+    key: 'ca.crt'
 
 authentication:
   ssl:
     enabled: false
     useExternal: false
     externalSecretName: ""
-
-sharedData:
-  serviceUrls:
-    jobManager: 'http://job-service-url'
-    heartbeatManager: 'http://heartbeat-service-url'
-  ca:
-    secretName: ''
-    path: '/usr/local/share/ca-certificates'
-    key: 'ca.crt'
 
 # ====================================================================================================
 # Local certificate files variables
@@ -48,6 +43,10 @@ cron:
   failedJobsHistoryLimit: 3
   concurrencyPolicy: Forbid
   restartPolicy: Never
+
+serviceUrls:
+  jobManager: 'http://job-service-url'
+  heartbeatManager: 'http://heartbeat-service-url'
 
 env:
   logLevel: 'warn'
