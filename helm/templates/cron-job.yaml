@@ -38,10 +38,10 @@ spec:
             - name: {{ $cloudProviderImagePullSecretName | quote }}
           {{- end }}
           volumes:
-          {{- if .Values.sharedData.ca.secretName }}
+          {{- if .Values.global.ca.secretName }}
           - name: root-ca
             secret:
-              secretName: {{ .Values.sharedData.ca.secretName }}
+              secretName: {{ .Values.global.ca.secretName }}
           {{- end }}
           {{- if .Values.authentication.ssl.enabled }}
           - name: open-ssl
@@ -56,20 +56,20 @@ spec:
               {{- end }}
               imagePullPolicy: {{ .Values.image.pullPolicy }}
               env:
-               {{- if .Values.sharedData.ca.secretName }}
+               {{- if .Values.global.ca.secretName }}
                 - name: REQUESTS_CA_BUNDLE
-                  value: {{ printf "%s/%s" .Values.sharedData.ca.path .Values.sharedData.ca.key | quote }}
+                  value: {{ printf "%s/%s" .Values.global.ca.path .Values.global.ca.key | quote }}
                 - name: NODE_EXTRA_CA_CERTS
-                  value: {{ printf "[%s/%s]" .Values.sharedData.ca.path .Values.sharedData.ca.key | quote }}
+                  value: {{ printf "[%s/%s]" .Values.global.ca.path .Values.global.ca.key | quote }}
             {{- end }}
               envFrom:
                 - configMapRef:
                     name: {{ $releaseName }}-configmap
               volumeMounts: 
-                {{- if .Values.sharedData.ca.secretName }}
+                {{- if .Values.global.ca.secretName }}
                 - name: root-ca
-                  mountPath: {{ printf "%s/%s" .Values.sharedData.ca.path .Values.sharedData.ca.key | quote }}
-                  subPath: {{ quote .Values.sharedData.ca.key }}
+                  mountPath: {{ printf "%s/%s" .Values.global.ca.path .Values.global.ca.key | quote }}
+                  subPath: {{ quote .Values.global.ca.key }}
                 {{- end }}
                 {{- if .Values.authentication.ssl.enabled }}
                 - name: open-ssl

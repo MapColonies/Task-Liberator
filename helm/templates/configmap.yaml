@@ -1,17 +1,18 @@
 {{- $chartName := include "task-liberator.name" . -}}
+{{- $configmapName := include "configmap.fullname" . }}
 {{- $tracingUrl := include "task-liberator.tracingUrl" . -}}
 {{- $metricsUrl := include "task-liberator.metricsUrl" . -}}
 {{- if .Values.enabled -}}
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Release.Name }}-configmap
+  name: {{ $configmapName }}
 data:
   LOG_LEVEL: {{ .Values.env.logLevel | quote }}
-  JOB_SERVICE_URL: {{ .Values.sharedData.serviceUrls.jobManager | quote }}
+  JOB_SERVICE_URL: {{ .Values.serviceUrls.jobManager | quote }}
   HEARTBEAT_ENABLED: {{ .Values.env.heartbeat.enabled | quote }}
   HEARTBEAT_FAILED_DURATION_MS: {{ .Values.env.heartbeat.failedDurationMs | quote }}
-  HEARTBEAT_SERVICE_URL: {{ .Values.sharedData.serviceUrls.heartbeatManager | quote }}
+  HEARTBEAT_SERVICE_URL: {{ .Values.serviceUrls.heartbeatManager | quote }}
   UPDATE_TIME_ENABLED: {{ .Values.env.updateTime.enabled | quote }}
   UPDATE_TIME_FAILED_DURATION_SEC: {{ .Values.env.updateTime.failedDurationSec | quote }}
   UPDATE_TIME_TASK_TYPES: {{ .Values.env.updateTime.taskTypes | toJson | quote }}
