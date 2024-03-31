@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/MapColonies/Task-Liberator/compare/v1.1.14...v1.2.0) (2024-03-31)
+
+
+### Features
+
+* changes for new common job-manager umbrella (MAPCO-4080) ([#21](https://github.com/MapColonies/Task-Liberator/issues/21)) ([af87229](https://github.com/MapColonies/Task-Liberator/commit/af87229b3751fd66a8d4e996bd01b33bd75e086b))
+
 ### [1.1.14](https://github.com/MapColonies/Task-Liberator/compare/v1.1.13...v1.1.14) (2023-09-20)
 
 
