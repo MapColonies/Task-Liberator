@@ -1,4 +1,5 @@
 {{- $releaseName := .Release.Name -}}
+{{- $cronjobNsame := include "cronjob.fullname" . }}
 {{- $chartName := include "task-liberator.name" . -}}
 {{- $cloudProviderFlavor := include "task-liberator.cloudProviderFlavor" . -}}
 {{- $cloudProviderDockerRegistryUrl := include "task-liberator.cloudProviderDockerRegistryUrl" . -}}
@@ -17,7 +18,7 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: {{ $releaseName }}
+  name: {{ $cronjobNsame }}
   labels:
     app: {{ $chartName }}
     component: {{ $chartName }}
