@@ -1,5 +1,6 @@
 {{- $releaseName := .Release.Name -}}
 {{- $cronjobNsame := include "cronjob.fullname" . }}
+{{- $configmapName := include "configmap.fullname" . }}
 {{- $chartName := include "task-liberator.name" . -}}
 {{- $cloudProviderFlavor := include "task-liberator.cloudProviderFlavor" . -}}
 {{- $cloudProviderDockerRegistryUrl := include "task-liberator.cloudProviderDockerRegistryUrl" . -}}
@@ -65,7 +66,7 @@ spec:
             {{- end }}
               envFrom:
                 - configMapRef:
-                    name: {{ $releaseName }}-configmap
+                    name: {{ $configmapName }}
               volumeMounts: 
                 {{- if .Values.global.ca.secretName }}
                 - name: root-ca
