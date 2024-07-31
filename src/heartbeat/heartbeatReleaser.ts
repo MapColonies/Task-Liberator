@@ -5,7 +5,6 @@ import { HeartbeatClient } from '../clients/heartbeatClient';
 import { TasksClient } from '../clients/tasksClient';
 import { Services } from '../common/constants';
 import { IConfig } from '../common/interfaces';
-import { toBoolean } from '../common/utilities/typeConvertors';
 
 @injectable()
 export class HeartbeatReleaser {
@@ -20,7 +19,7 @@ export class HeartbeatReleaser {
     private readonly heartbeatClient: HeartbeatClient,
     private readonly tasksClient: TasksClient
   ) {
-    this.enabled = toBoolean(config.get('heartbeat.enabled'));
+    this.enabled = config.get<boolean>('heartbeat.enabled');
   }
 
   public async run(): Promise<void> {

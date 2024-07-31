@@ -4,7 +4,6 @@ import { inject, injectable } from 'tsyringe';
 import { TasksClient } from '../clients/tasksClient';
 import { Services } from '../common/constants';
 import { IConfig } from '../common/interfaces';
-import { toBoolean } from '../common/utilities/typeConvertors';
 import { HeartbeatClient } from '../clients/heartbeatClient';
 import { NotFoundError } from '../common/exceptions/http/notFoundError';
 
@@ -20,8 +19,8 @@ export class UpdateTimeReleaser {
     private readonly tasksClient: TasksClient,
     private readonly heartbeatClient: HeartbeatClient
   ) {
-    this.enabled = toBoolean(config.get('updateTime.enabled'));
-    this.checkHeartbeatEnabled = toBoolean(config.get('updateTime.checkHeartbeat'));
+    this.enabled = config.get<boolean>('updateTime.enabled');
+    this.checkHeartbeatEnabled = config.get<boolean>('updateTime.checkHeartbeat');
   }
 
   public async run(): Promise<void> {
