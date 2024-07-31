@@ -11,6 +11,7 @@ import { NotFoundError } from '../common/exceptions/http/notFoundError';
 @injectable()
 export class UpdateTimeReleaser {
   private readonly enabled: boolean;
+  private readonly checkHeartbeatEnabled: boolean;
 
   public constructor(
     @inject(Services.CONFIG) config: IConfig,
@@ -20,6 +21,7 @@ export class UpdateTimeReleaser {
     private readonly heartbeatClient: HeartbeatClient
   ) {
     this.enabled = toBoolean(config.get('updateTime.enabled'));
+    this.checkHeartbeatEnabled = toBoolean(config.get('updateTime.checkHeartbeat'));
   }
 
   public async run(): Promise<void> {
@@ -32,15 +34,19 @@ export class UpdateTimeReleaser {
     this.logger.info('starting update time releaser.');
 
     const inactiveTasks = await this.tasksClient.getInactiveTasks();
-    const deadTasks: string[] = [];
-    for (const task of inactiveTasks) {
-      try {
-        await this.heartbeatClient.getHeartbeat(task);
-      } catch (error) {
-        if (error instanceof NotFoundError) {
-          deadTasks.push(task);
+    let deadTasks: string[] = [];
+    if (this.checkHeartbeatEnabled) {
+      for (const task of inactiveTasks) {
+        try {
+          await this.heartbeatClient.getHeartbeat(task);
+        } catch (error) {
+          if (error instanceof NotFoundError) {
+            deadTasks.push(task);
+          }
         }
       }
+    } else {
+      deadTasks = inactiveTasks;
     }
     if (deadTasks.length > 0) {
       this.logger.info(`releasing tasks: ${deadTasks.join()}`);

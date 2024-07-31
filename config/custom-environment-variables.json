@@ -24,7 +24,11 @@
       "__format": "number"
     },
     "taskTypes": "UPDATE_TIME_TASK_TYPES",
-    "ignoredTaskTypes": "UPDATE_TIME_IGNORED_TASK_TYPES"
+    "ignoredTaskTypes": "UPDATE_TIME_IGNORED_TASK_TYPES",
+    "checkHeartbeat": {
+      "__name": "UPDATE_TIME_CHECK_HEARTBEAT_ENABLED",
+      "__format": "boolean"
+    }
   },
   "expirationStatus": {
     "enabled": {

@@ -64,6 +64,7 @@ env:
     failedDurationSec: 300
     taskTypes: []
     ignoredTaskTypes: []
+    checkHeartbeat: false
   expirationStatus:
     enabled: true    
   httpRetry:
