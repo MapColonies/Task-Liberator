@@ -5,6 +5,8 @@ import { TasksClient } from '../clients/tasksClient';
 import { Services } from '../common/constants';
 import { IConfig } from '../common/interfaces';
 import { toBoolean } from '../common/utilities/typeConvertors';
+import { HeartbeatClient } from '../clients/heartbeatClient';
+import { NotFoundError } from '../common/exceptions/http/notFoundError';
 
 @injectable()
 export class UpdateTimeReleaser {
@@ -14,7 +16,8 @@ export class UpdateTimeReleaser {
     @inject(Services.CONFIG) config: IConfig,
     @inject(Services.LOGGER) private readonly logger: Logger,
     @inject(Services.TRACER) private readonly tracer: Tracer,
-    private readonly tasksClient: TasksClient
+    private readonly tasksClient: TasksClient,
+    private readonly heartbeatClient: HeartbeatClient
   ) {
     this.enabled = toBoolean(config.get('updateTime.enabled'));
   }
@@ -28,7 +31,17 @@ export class UpdateTimeReleaser {
     const span = this.tracer.startSpan('update-time-releaser');
     this.logger.info('starting update time releaser.');
 
-    const deadTasks = await this.tasksClient.getInactiveTasks();
+    const inactiveTasks = await this.tasksClient.getInactiveTasks();
+    const deadTasks: string[] = [];
+    for (const task of inactiveTasks) {
+      try {
+        await this.heartbeatClient.getHeartbeat(task);
+      } catch (error) {
+        if (error instanceof NotFoundError) {
+          deadTasks.push(task);
+        }
+      }
+    }
     if (deadTasks.length > 0) {
       this.logger.info(`releasing tasks: ${deadTasks.join()}`);
       const released = await this.tasksClient.releaseTasks(deadTasks);

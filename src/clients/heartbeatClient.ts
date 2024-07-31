@@ -17,6 +17,11 @@ export class HeartbeatClient extends HttpClient {
     this.baseUrl = config.get('heartbeat.serviceUrl');
   }
 
+  public async getHeartbeat(id: string): Promise<string> {
+    const url = `${this.baseUrl}/heartbeat/${id}`;
+    return this.get<string>(url);
+  }
+
   public async getInactiveTasks(): Promise<string[]> {
     const url = `${this.baseUrl}/heartbeat/expired/${this.failedHeartbeatDuration}`;
     return this.get<string[]>(url);
