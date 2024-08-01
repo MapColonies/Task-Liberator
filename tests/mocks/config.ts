@@ -1,5 +1,4 @@
 import config from 'config';
-import { get, has } from 'lodash';
 import { IConfig } from '../../src/common/interfaces';
 
 let mockConfig: Record<string, unknown> = {};

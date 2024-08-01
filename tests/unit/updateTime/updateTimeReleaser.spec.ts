@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker';
 import jsLogger from '@map-colonies/js-logger';
 import { UpdateTimeReleaser } from '../../../src/updateTime/updateTimeReleaser';
 import { tracerMock, initTrace } from '../../mocks/openTelemetry/tracer';
-import { configMock, getMock, setValue, init as initconfig, clear as clearConfig } from '../../mocks/config';
+import { configMock, getMock, setValue, init as initConfig, clear as clearConfig } from '../../mocks/config';
 import { tasksClientMock, tasksReleaseTasksMock, tasksInactiveTasksMock } from '../../mocks/clients/tasksClient';
 import { heartbeatClientMock, getHeartbeatMock } from '../../mocks/clients/heartbeatClient';
 import { NotFoundError } from '../../../src/common/exceptions/http/notFoundError';
@@ -12,7 +12,7 @@ let releaser: UpdateTimeReleaser;
 describe('UpdateTimeReleaser', () => {
   beforeEach(function () {
     initTrace();
-    initconfig();
+    initConfig();
     // setValue('updateTime.enabled', true);
   });
 
