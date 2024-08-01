@@ -60,7 +60,6 @@
     "@types/config": "3.3.0",
     "@types/jest": "^29.4.0",
     "@types/lodash": "^4.14.191",
-    "@types/uuid": "^10.0.0",
     "commitizen": "^4.2.4",
     "commitlint": "^17.4.4",
     "copyfiles": "^2.4.1",
