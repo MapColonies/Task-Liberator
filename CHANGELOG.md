@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/MapColonies/Task-Liberator/compare/v1.2.3...v1.3.0) (2024-08-01)
+
+
+### Features
+
+* update time releaser option to release only inactive tasks that never had a heartbeat ([#24](https://github.com/MapColonies/Task-Liberator/issues/24)) ([ff4e514](https://github.com/MapColonies/Task-Liberator/commit/ff4e514314b16fec78bd1b4d6b60f0984770ce3f))
+
 ### [1.2.3](https://github.com/MapColonies/Task-Liberator/compare/v1.2.2...v1.2.3) (2024-04-08)
 
 
