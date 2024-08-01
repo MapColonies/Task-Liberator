@@ -12,7 +12,8 @@
     "enabled": true,
     "failedDurationSec": 300,
     "taskTypes": [],
-    "ignoredTaskTypes": []
+    "ignoredTaskTypes": [],
+    "checkHeartbeat": false
   },
   "expirationStatus": {
     "enabled": true

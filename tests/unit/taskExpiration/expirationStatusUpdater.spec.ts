@@ -1,7 +1,7 @@
 import jsLogger from '@map-colonies/js-logger';
 import { ExpirationStatusUpdater } from '../../../src/taskExpiration/expirartionStatusUpdater';
 import { tracerMock, initTrace } from '../../mocks/openTelemetry/tracer';
-import { configMock, getMock } from '../../mocks/config';
+import { configMock, getMock, setValue, init as initConfig, clear as clearConfig } from '../../mocks/config';
 import { tasksClientMock, updateExpiredStatusMock } from '../../mocks/clients/tasksClient';
 
 let updater: ExpirationStatusUpdater;
@@ -9,16 +9,19 @@ let updater: ExpirationStatusUpdater;
 describe('UpdateTimeReleaser', () => {
   beforeEach(function () {
     initTrace();
+    initConfig();
+    setValue('expirationStatus.enabled', true);
   });
 
   afterEach(function () {
+    clearConfig();
     jest.resetAllMocks();
   });
 
   describe('run', () => {
-    it('do noting when disabled', async function () {
+    it('do nothing when disabled', async function () {
       //mock data
-      getMock.mockReturnValue('false');
+      setValue('expirationStatus.enabled', false);
 
       // action
       updater = new ExpirationStatusUpdater(configMock, jsLogger({ enabled: false }), tracerMock, tasksClientMock);
@@ -32,7 +35,6 @@ describe('UpdateTimeReleaser', () => {
 
     it('trigger expiration status update', async function () {
       //mock data
-      getMock.mockReturnValueOnce(true);
       // action
       updater = new ExpirationStatusUpdater(configMock, jsLogger({ enabled: false }), tracerMock, tasksClientMock);
       await updater.run();

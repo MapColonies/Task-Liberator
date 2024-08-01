@@ -1,7 +1,7 @@
 import jsLogger from '@map-colonies/js-logger';
 import { HeartbeatReleaser } from '../../../src/heartbeat/heartbeatReleaser';
 import { tracerMock, initTrace } from '../../mocks/openTelemetry/tracer';
-import { configMock, getMock } from '../../mocks/config';
+import { configMock, getMock, setValue, init as initConfig, clear as clearConfig } from '../../mocks/config';
 import { heartbeatClientMock, heartbeatInactiveTasksMock, heartbeatRemoveTasksMock } from '../../mocks/clients/heartbeatClient';
 import { tasksClientMock, tasksReleaseTasksMock } from '../../mocks/clients/tasksClient';
 
@@ -10,16 +10,19 @@ let releaser: HeartbeatReleaser;
 describe('HeartbeatReleaser', () => {
   beforeEach(function () {
     initTrace();
+    initConfig();
+    setValue('updateTime.enabled', true);
   });
 
   afterEach(function () {
+    clearConfig();
     jest.resetAllMocks();
   });
 
   describe('run', () => {
-    it('do noting when disabled', async function () {
+    it('do nothing when disabled', async function () {
       //mock data
-      getMock.mockReturnValue('false');
+      setValue('heartbeat.enabled', false);
 
       // action
       releaser = new HeartbeatReleaser(configMock, jsLogger({ enabled: false }), tracerMock, heartbeatClientMock, tasksClientMock);
@@ -33,9 +36,8 @@ describe('HeartbeatReleaser', () => {
       expect(tasksReleaseTasksMock).not.toHaveBeenCalled();
     });
 
-    it('do noting when there are no dead heartbeats', async function () {
+    it('do nothing when there are no dead heartbeats', async function () {
       //mock data
-      getMock.mockReturnValue(true);
       heartbeatInactiveTasksMock.mockResolvedValue([]);
       // action
       releaser = new HeartbeatReleaser(configMock, jsLogger({ enabled: false }), tracerMock, heartbeatClientMock, tasksClientMock);
@@ -54,7 +56,6 @@ describe('HeartbeatReleaser', () => {
       const deadHeartbeats = ['dead', 'completed'];
       const deadTasks = ['dead'];
       const completedTasks = ['completed'];
-      getMock.mockReturnValue(true);
       heartbeatInactiveTasksMock.mockResolvedValue(deadHeartbeats);
       tasksReleaseTasksMock.mockResolvedValue(deadTasks);
       // action
@@ -75,7 +76,6 @@ describe('HeartbeatReleaser', () => {
       //mock data
       const deadHeartbeats = ['dead'];
       const deadTasks = ['dead'];
-      getMock.mockReturnValue(true);
       heartbeatInactiveTasksMock.mockResolvedValue(deadHeartbeats);
       tasksReleaseTasksMock.mockResolvedValue(deadTasks);
       // action

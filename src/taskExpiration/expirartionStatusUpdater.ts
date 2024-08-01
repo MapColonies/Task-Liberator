@@ -4,7 +4,6 @@ import { inject, injectable } from 'tsyringe';
 import { TasksClient } from '../clients/tasksClient';
 import { Services } from '../common/constants';
 import { IConfig } from '../common/interfaces';
-import { toBoolean } from '../common/utilities/typeConvertors';
 
 @injectable()
 export class ExpirationStatusUpdater {
@@ -16,7 +15,7 @@ export class ExpirationStatusUpdater {
     @inject(Services.TRACER) private readonly tracer: Tracer,
     private readonly tasksClient: TasksClient
   ) {
-    this.enabled = toBoolean(config.get('expirationStatus.enabled'));
+    this.enabled = config.get<boolean>('expirationStatus.enabled');
   }
 
   public async run(): Promise<void> {
