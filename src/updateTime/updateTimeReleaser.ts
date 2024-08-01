@@ -40,7 +40,7 @@ export class UpdateTimeReleaser {
           await this.heartbeatClient.getHeartbeat(task);
         } catch (error) {
           if (error instanceof NotFoundError) {
-            this.logger.debug(`found dead job that never had a heartbeat: ${task}`);
+            this.logger.debug({ msg: 'Found dead task that never had a heartbeat', task });
             deadTasks.push(task);
           }
         }

@@ -1,7 +1,7 @@
 import jsLogger from '@map-colonies/js-logger';
 import { ExpirationStatusUpdater } from '../../../src/taskExpiration/expirartionStatusUpdater';
 import { tracerMock, initTrace } from '../../mocks/openTelemetry/tracer';
-import { configMock, getMock, setValue, init as initconfig, clear as clearConfig } from '../../mocks/config';
+import { configMock, getMock, setValue, init as initConfig, clear as clearConfig } from '../../mocks/config';
 import { tasksClientMock, updateExpiredStatusMock } from '../../mocks/clients/tasksClient';
 
 let updater: ExpirationStatusUpdater;
@@ -9,7 +9,7 @@ let updater: ExpirationStatusUpdater;
 describe('UpdateTimeReleaser', () => {
   beforeEach(function () {
     initTrace();
-    initconfig();
+    initConfig();
     setValue('expirationStatus.enabled', true);
   });
 

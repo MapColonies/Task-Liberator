@@ -1,7 +1,7 @@
 import jsLogger from '@map-colonies/js-logger';
 import { HeartbeatReleaser } from '../../../src/heartbeat/heartbeatReleaser';
 import { tracerMock, initTrace } from '../../mocks/openTelemetry/tracer';
-import { configMock, getMock, setValue, init as initconfig, clear as clearConfig } from '../../mocks/config';
+import { configMock, getMock, setValue, init as initConfig, clear as clearConfig } from '../../mocks/config';
 import { heartbeatClientMock, heartbeatInactiveTasksMock, heartbeatRemoveTasksMock } from '../../mocks/clients/heartbeatClient';
 import { tasksClientMock, tasksReleaseTasksMock } from '../../mocks/clients/tasksClient';
 
@@ -10,7 +10,7 @@ let releaser: HeartbeatReleaser;
 describe('HeartbeatReleaser', () => {
   beforeEach(function () {
     initTrace();
-    initconfig();
+    initConfig();
     setValue('updateTime.enabled', true);
   });
 
