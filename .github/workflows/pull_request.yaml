@@ -4,7 +4,8 @@ on: [pull_request]
 
 jobs:
   pull_request:
-    uses: MapColonies/shared-workflows/.github/workflows/pull_request.yaml@master
+    uses: MapColonies/shared-workflows/.github/workflows/pull_request.yaml@add-postgres-pr
     secrets: inherit
     with:
       enableOpenApiCheck: false
+      usePostgres:
