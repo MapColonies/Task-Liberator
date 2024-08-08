@@ -8,4 +8,4 @@ jobs:
     secrets: inherit
     with:
       enableOpenApiCheck: false
-      usePostgres:
+      usePostgres: ''
