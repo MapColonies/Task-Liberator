@@ -38,7 +38,7 @@ async function run(logger: Logger): Promise<void> {
     const error = err as Error;
     logger.error(error.message);
   }
-  
+
   isActive = false;
 }
 
