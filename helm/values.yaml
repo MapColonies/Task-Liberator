@@ -26,6 +26,7 @@ local:
 
 enabled: true
 environment: 'development'
+replicaCount: 1
 
 cloudProvider:
   dockerRegistryUrl: 'my-registry-url.io'
@@ -36,13 +37,6 @@ image:
   repository: 'task-liberator'
   tag: 'latest'
   pullPolicy: IfNotPresent
-
-cron:
-  schedule: "*/1 * * * *"
-  successfulJobsHistoryLimit: 1
-  failedJobsHistoryLimit: 3
-  concurrencyPolicy: Forbid
-  restartPolicy: Never
 
 serviceUrls:
   jobManager: 'http://job-service-url'
@@ -71,6 +65,7 @@ env:
     attempts: 3
     delay: 'exponential'
     shouldResetTimeout: true
+  intervalMs: 10000
 
 resources:
   enabled: true

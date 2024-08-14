@@ -5,6 +5,6 @@ Create configmap name as used by the service name label.
 {{- printf "%s-%s-%s" .Release.Name .Chart.Name "configmap" | indent 1 }}
 {{- end }}
 
-{{- define "cronjob.fullname" -}}
-{{- printf "%s-%s-%s" .Release.Name .Chart.Name "cron-job" | indent 1 }}
+{{- define "deployment.fullname" -}}
+{{- printf "%s-%s-%s" .Release.Name .Chart.Name "deployment" | indent 1 }}
 {{- end }}
