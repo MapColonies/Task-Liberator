@@ -112,3 +112,6 @@ reports
 
 # Helm local config values file
 local.yaml
+
+# local config values json file
+local.json

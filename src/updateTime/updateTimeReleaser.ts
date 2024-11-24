@@ -50,7 +50,7 @@ export class UpdateTimeReleaser {
     }
     if (deadTasks.length > 0) {
       this.logger.info(`releasing tasks: ${deadTasks.join()}`);
-      const released = await this.tasksClient.releaseTasks(deadTasks);
+      const released = await this.tasksClient.releaseTasks(deadTasks, false);
       this.logger.debug(`released tasks: ${released.join()}`);
     } else {
       this.logger.info('no dead tasks to release');

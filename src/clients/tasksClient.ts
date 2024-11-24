@@ -35,8 +35,8 @@ export class TasksClient extends HttpClient {
     return this.post<string[]>(url, body);
   }
 
-  public async releaseTasks(ids: string[]): Promise<string[]> {
-    const url = `${this.baseUrl}/tasks/releaseInactive`;
+  public async releaseTasks(ids: string[], shouldRaiseAttempts = true): Promise<string[]> {
+    const url = `${this.baseUrl}/tasks/releaseInactive/?shouldRaiseAttempts=${String(shouldRaiseAttempts)}`;
     return this.post<string[]>(url, ids);
   }
 
