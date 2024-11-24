@@ -3,6 +3,7 @@
 import 'reflect-metadata';
 import { Tracing } from '@map-colonies/telemetry';
 import { Logger } from '@map-colonies/js-logger';
+import config from 'config';
 import { HttpInstrumentation } from '@opentelemetry/instrumentation-http';
 import { container } from 'tsyringe';
 import { IGNORED_INCOMING_TRACE_ROUTES, IGNORED_OUTGOING_TRACE_ROUTES, Services } from './common/constants';
@@ -11,7 +12,14 @@ import { UpdateTimeReleaser } from './updateTime/updateTimeReleaser';
 import { HeartbeatReleaser } from './heartbeat/heartbeatReleaser';
 import { ExpirationStatusUpdater } from './taskExpiration/expirartionStatusUpdater';
 
+let isActive = false;
+
 async function run(logger: Logger): Promise<void> {
+  if (isActive) {
+    return;
+  }
+  isActive = true;
+
   try {
     await container.resolve(UpdateTimeReleaser).run();
   } catch (err) {
@@ -30,6 +38,8 @@ async function run(logger: Logger): Promise<void> {
     const error = err as Error;
     logger.error(error.message);
   }
+
+  isActive = false;
 }
 
 function main(): void {
@@ -39,10 +49,16 @@ function main(): void {
 
   registerExternalValues(tracing);
   const logger = container.resolve<Logger>(Services.LOGGER);
-  void run(logger).catch((err) => {
-    const error = err as Error;
-    logger.error(error.message);
-  });
+  setInterval(() => {
+    void (async (): Promise<void> => {
+      try {
+        await run(logger);
+      } catch (err) {
+        const error = err as Error;
+        logger.error(error.message);
+      }
+    })();
+  }, config.get<number>('intervalMs'));
 
   void tracing.stop();
 }
