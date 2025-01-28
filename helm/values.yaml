@@ -60,7 +60,7 @@ env:
     ignoredTaskTypes: []
     checkHeartbeat: false
   expirationStatus:
-    enabled: true    
+    enabled: true
   httpRetry:
     attempts: 3
     delay: 'exponential'
