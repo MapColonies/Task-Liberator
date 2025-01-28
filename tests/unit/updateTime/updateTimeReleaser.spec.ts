@@ -74,7 +74,7 @@ describe('UpdateTimeReleaser', () => {
         expect(getMock).toHaveBeenCalledTimes(2);
         expect(tasksInactiveTasksMock).toHaveBeenCalledTimes(1);
         expect(tasksReleaseTasksMock).toHaveBeenCalledTimes(1);
-        expect(tasksReleaseTasksMock).toHaveBeenCalledWith(deadTasks);
+        expect(tasksReleaseTasksMock).toHaveBeenCalledWith(deadTasks, false);
         expect(getHeartbeatMock).not.toHaveBeenCalled();
       });
     });
@@ -118,7 +118,7 @@ describe('UpdateTimeReleaser', () => {
         expect(getMock).toHaveBeenCalledTimes(2);
         expect(tasksInactiveTasksMock).toHaveBeenCalledTimes(1);
         expect(tasksReleaseTasksMock).toHaveBeenCalledTimes(1);
-        expect(tasksReleaseTasksMock).toHaveBeenCalledWith(deadTasks);
+        expect(tasksReleaseTasksMock).toHaveBeenCalledWith(deadTasks, false);
         expect(getHeartbeatMock).toThrow(NotFoundError);
       });
     });

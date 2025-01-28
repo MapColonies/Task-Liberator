@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/MapColonies/task-liberator/compare/v1.3.1...v1.4.0) (2024-11-24)
+
+
+### Features
+
+* update time releaser now doesn't increase attempts (MAPCO-5466) ([#29](https://github.com/MapColonies/task-liberator/issues/29)) ([2282595](https://github.com/MapColonies/task-liberator/commit/228259507678e01dddc92e1f94799cb6e47cae22))
+
 ### [1.3.1](https://github.com/MapColonies/Task-Liberator/compare/v1.3.0...v1.3.1) (2024-08-08)
 
 
