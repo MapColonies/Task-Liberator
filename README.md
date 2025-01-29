@@ -8,7 +8,7 @@
 
 ## Overview
 
-This service operates as a cron job to manage task states in the job management service. It updates "IN-PROGRESS" tasks to "PENDING" state and increases their attempt count, allowing them to be retried by the relevant task worker. This occurs when a task exceeds the configured expiration time or its heartbeat has stopped.
+This service operates as a cron job to manage task states in job management service. It updates "IN-PROGRESS" tasks to "PENDING" state and increases their attempt count, allowing them to be retried by the relevant task worker. This occurs when a task exceeds the configured expiration time or its heartbeat has stopped.
 
 ## Architecture
 
