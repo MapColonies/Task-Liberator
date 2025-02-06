@@ -55,7 +55,7 @@ function main(): void {
         await run(logger);
       } catch (err) {
         const error = err as Error;
-        logger.error(error.message);
+        logger.error({ msg: `Main Loop error: ${error.message}`, err });
       }
     })();
   }, config.get<number>('intervalMs'));
