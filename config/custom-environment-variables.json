@@ -47,5 +47,9 @@
       "__format": "boolean"
     }
   },
-  "intervalMs": "INTERVAL_MS"
+  "intervalMs": {
+      "__name": "INTERVAL_MS",
+      "__format": "number"
+}
+  
 }
