@@ -48,8 +48,7 @@
     }
   },
   "intervalMs": {
-      "__name": "INTERVAL_MS",
-      "__format": "number"
-}
-  
+    "__name": "INTERVAL_MS",
+    "__format": "number"
+  }
 }

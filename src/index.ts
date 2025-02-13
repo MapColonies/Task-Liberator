@@ -12,7 +12,6 @@ import { UpdateTimeReleaser } from './updateTime/updateTimeReleaser';
 import { HeartbeatReleaser } from './heartbeat/heartbeatReleaser';
 import { ExpirationStatusUpdater } from './taskExpiration/expirartionStatusUpdater';
 
-
 async function run(logger: Logger): Promise<void> {
   try {
     await container.resolve(UpdateTimeReleaser).run();
